@@ -108,51 +108,24 @@ def handle_message(event):
 
     if msg_from_user == 'mulai':
         message = TemplateSendMessage(
-    		alt_text='Carousel template',
-    		template=CarouselTemplate(
-        		columns=[
-            		CarouselColumn(
-                		thumbnail_image_url='https://i.pinimg.com/564x/0d/b8/98/0db89880dfa0595585f33ddb50da89f9.jpg',
-               			title='Aturan Permainan Truth or dare',
-                		text='Klik tombol dibawah untuk diarahkan ke tutorialnya',
-                		actions=[
-                    	    URITemplateAction(
-                                label='video aturan games',
-                                uri='https://youtu.be/4iP4PEncYDY'
-                            ),
-                            MessageTemplateAction(
-                                label='Gambar aturan games',
-                                text='aturan'
-                            )
-                        ]
-                    ),		
-            		CarouselColumn(
-                		thumbnail_image_url='https://i.pinimg.com/564x/c0/a1/12/c0a112ab16789fa102738ce42911a59d.jpg',
-                		title='Memulai permainan',
-                		text='Untuk memulai permainan, klik tombol dibawah ini',
-                		actions=[
-                    	    MessageTemplateAction(
-                        	    label='klik di sini',
-                        	    text='start'
-                    		),
-                		]
-            		),
-                    CarouselColumn(
-                		thumbnail_image_url='https://i.pinimg.com/564x/d4/3e/11/d43e11239ccdabad5e75277d2d489882.jpg',
-               			title='Ingin Lanjut atau berhenti?',
-                		text='',
-                		actions=[
-                    	    MessageTemplateAction(
-                        	    label='klik',
-                        	    text= 'Ketik "berhenti" untuk menghentikan permainan dan ketik "mulai" untuk melanjutkan permainan'
-                    		),
-                		]
-            		)
-        		]
-    		)
-		)
+            alt_text='Buttons template',
+            template=ButtonsTemplate(
+                thumbnail_image_url='https://i.pinimg.com/564x/0d/b8/98/0db89880dfa0595585f33ddb50da89f9.jpg',
+                title='Menu',
+                text='Silahkan pilih',
+                actions=[
+                    URITemplateAction(
+                        label='Video tutorial games',
+                        uri='https://youtu.be/4iP4PEncYDY'
+                    ),
+                    MessageTemplateAction(
+                        label='Mulai truth or dare',
+                        text='start'
+                    )
+                ]
+            )
+        )
         line_bot_api.reply_message(event.reply_token, message)
-    
     
     if msg_from_user == 'start':
         message = TextSendMessage( "Kamu Mau pilih truth atau dare?" + 
