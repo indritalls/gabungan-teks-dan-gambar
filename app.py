@@ -113,7 +113,7 @@ def handle_message(event):
         		columns=[
             		CarouselColumn(
                 		thumbnail_image_url='https://i.pinimg.com/564x/0d/b8/98/0db89880dfa0595585f33ddb50da89f9.jpg',
-               			title='Games Truth',
+               			title='Games truth',
                 		text='Pilihlah jenis games yang kalian inginkan',
                 		actions=[
                     	    MessageTemplateAction(
@@ -124,7 +124,7 @@ def handle_message(event):
             		),
             		CarouselColumn(
                 		thumbnail_image_url='https://i.pinimg.com/564x/c0/a1/12/c0a112ab16789fa102738ce42911a59d.jpg',
-                		title='Games Dare',
+                		title='Games dare',
                 		text='Pilihlah jenis games yang kalian inginkan',
                 		actions=[
                     	    MessageTemplateAction(
@@ -150,7 +150,7 @@ def handle_message(event):
                 		text='Jika kalian tidak bisa menjawab, klik tombol dibawah ini',
                 		actions=[
                     	    MessageTemplateAction(
-                        	    label='klik disini',
+                        	    label='klik di sini',
                         	    text= 'hukuman'
                     		),
                 		]
@@ -161,7 +161,7 @@ def handle_message(event):
                 		text='Untuk melanjutkan permainan ataupun menghentikan permainan, klik tombol dibawah ini',
                 		actions=[
                     	    MessageTemplateAction(
-                        	    label='klik disini',
+                        	    label='klik di sini',
                         	    text= 'Ketik "berhenti" untuk menghentikan permainan dan ketik "mulai" untuk melanjutkan permainan'
                     		),
                 		]
