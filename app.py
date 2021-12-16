@@ -150,7 +150,7 @@ def handle_message(event):
                 		text='klik lah tombol dibawah ini jika kalian tidak bisa menjawab',
                 		actions=[
                     	    MessageTemplateAction(
-                        	    label='klik di sini',
+                        	    label='klik disini',
                         	    text= 'hukuman'
                     		),
                 		]
@@ -161,7 +161,7 @@ def handle_message(event):
                 		text='Untuk melanjutkan atau menghentikan games ini, klik tombol dibawah ini',
                 		actions=[
                     	    MessageTemplateAction(
-                        	    label='klik di sini',
+                        	    label='klik',
                         	    text= 'Ketik "berhenti" untuk menghentikan permainan dan ketik "mulai" untuk melanjutkan permainan'
                     		),
                 		]
