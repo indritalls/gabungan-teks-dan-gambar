@@ -140,12 +140,11 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token, message)
 
     if msg_from_user == 'hukuman':
-        line_bot_api.push_message(
-        event.reply_token,
-        ImageSendMessage(
-            original_content_url=gambar,
-            preview_image_url='https://i.pinimg.com/564x/40/1e/cf/401ecf89c1d2cbac56d26cc95c3f9fb2.jpg'))
-
+        image_message = ImageSendMessage(
+            original_content_url='https://example.com/original.jpg',
+            preview_image_url='https://example.com/preview.jpg'
+        )
+        line_bot_api.reply_message(event.reply_token, image_message)
         
 import os
 if __name__ == "__main__":
