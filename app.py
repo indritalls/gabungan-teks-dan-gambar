@@ -106,7 +106,7 @@ def handle_message(event):
         52002745:8}
     stiker = random.choice(list(s.keys()))
 
-    if msg_from_user == 'tes':
+    if msg_from_user == 'mulai':
         message = TemplateSendMessage(
     		alt_text='Carousel template',
     		template=CarouselTemplate(
@@ -144,7 +144,7 @@ def handle_message(event):
                 		actions=[
                     	    MessageTemplateAction(
                         	    label='klik',
-                        	    text= 'Ketik "berhenti" untuk menghentikan permainan dan ketik "tes" untuk melanjutkan permainan'
+                        	    text= 'Ketik "berhenti" untuk menghentikan permainan dan ketik "mulai" untuk melanjutkan permainan'
                     		),
                 		]
             		)
