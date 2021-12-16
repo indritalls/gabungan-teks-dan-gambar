@@ -141,8 +141,8 @@ def handle_message(event):
 
     if msg_from_user == 'hukuman':
         image_message = ImageSendMessage(
-            original_content_url='https://example.com/original.jpg',
-            preview_image_url='https://example.com/preview.jpg'
+            original_content_url=gambar,
+            preview_image_url='https://i.pinimg.com/564x/40/1e/cf/401ecf89c1d2cbac56d26cc95c3f9fb2.jpg'
         )
         line_bot_api.reply_message(event.reply_token, image_message)
         
