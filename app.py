@@ -113,52 +113,34 @@ def handle_message(event):
         		columns=[
             		CarouselColumn(
                 		thumbnail_image_url='https://i.pinimg.com/564x/0d/b8/98/0db89880dfa0595585f33ddb50da89f9.jpg',
-               			title='games truth',
-                		text='jika ingin memilih truth, klik tombol di bawah ini',
+               			title='Aturan Permainan Truth or dare',
+                		text='Klik tombol dibawah untuk diarahkan ke tutorialnya',
                 		actions=[
-                    	    MessageTemplateAction(
-                        	    label='truth',
-                        	    text= tth
-                    		),
-                		]
-            		),
+                    	    URITemplateAction(
+                                label='video aturan games',
+                                uri='https://youtu.be/4iP4PEncYDY'
+                            ),
+                            MessageTemplateAction(
+                                label='Gambar aturan games',
+                                text='aturan'
+                            )
+                        ]
+                    ),		
             		CarouselColumn(
                 		thumbnail_image_url='https://i.pinimg.com/564x/c0/a1/12/c0a112ab16789fa102738ce42911a59d.jpg',
-                		title='games dare',
-                		text='jika ingin memilih dare, klik tombol di bawah ini',
-                		actions=[
-                    	    MessageTemplateAction(
-                        	    label='dare',
-                        	    text=dare
-                    		),
-                		]
-            		),
-                    CarouselColumn(
-                		thumbnail_image_url='https://i.pinimg.com/564x/7d/c8/e5/7dc8e50f47a0ac39a163abe6ecc511a6.jpg',
-                		title='bisa menjawab',
-                		text='Jika bisa menjawab, klik tombol di bawah',
+                		title='Memulai permainan',
+                		text='Untuk memulai permainan, klik tombol dibawah ini',
                 		actions=[
                     	    MessageTemplateAction(
                         	    label='klik di sini',
-                        	    text='coba ceritain jika kamu memilih truth atau peragarakan langsung/videokan jika kamu memilih dare'
-                    		),
-                		]
-            		),
-                    CarouselColumn(
-                		thumbnail_image_url='https://i.pinimg.com/564x/a9/f0/40/a9f04016535daa98f06593117fb06e20.jpg',
-               			title='tidak bisa menjawab',
-                		text='klik lah tombol dibawah ini jika kalian tidak bisa menjawab',
-                		actions=[
-                    	    MessageTemplateAction(
-                        	    label='klik disini',
-                        	    text= 'hukuman'
+                        	    text='start'
                     		),
                 		]
             		),
                     CarouselColumn(
                 		thumbnail_image_url='https://i.pinimg.com/564x/d4/3e/11/d43e11239ccdabad5e75277d2d489882.jpg',
                			title='Ingin Lanjut atau berhenti?',
-                		text='Untuk melanjutkan atau menghentikan games ini, klik tombol dibawah ini',
+                		text='',
                 		actions=[
                     	    MessageTemplateAction(
                         	    label='klik',
@@ -170,20 +152,44 @@ def handle_message(event):
     		)
 		)
         line_bot_api.reply_message(event.reply_token, message)
+    
+    
+    if msg_from_user == 'start':
+        message = TextSendMessage( "Kamu Mau pilih truth atau dare?" + 
+        "\nketik 't' untuk memulai games truth" + 
+        "\nketik 'd' untuk memulai games dare")
+        line_bot_api.reply_message(event.reply_token, message)
 
-    if msg_from_user == 'hukuman':
+    if msg_from_user == 'aturan':
+        message = ImageSendMessage(
+        original_content_url='https://i.pinimg.com/564x/19/e9/c0/19e9c08e84ea5b4b713abc25f846b559.jpg',
+        preview_image_url='https://i.pinimg.com/564x/19/e9/c0/19e9c08e84ea5b4b713abc25f846b559.jpg')
+        line_bot_api.reply_message(event.reply_token, message)
+
+    if msg_from_user == 'truth':
+        message = TextSendMessage(tth + "\n" + "Apakah bisa menjawabnya? Ketik 'bisa' jika memang bisa dan ketik 'gabisa' jika tidak mampu melakukannya")
+        line_bot_api.reply_message(event.reply_token, message)
+
+    if msg_from_user == 'dare':
+        message = TextSendMessage(dare + "\n" + "Apakah bisa melakukan tantangan ini? Ketik 'bisa' jika memang bisa dan ketik 'gabisa' jika tidak mampu melakukannya")
+        line_bot_api.reply_message(event.reply_token, message)
+
+    if msg_from_user == 'bisa':
+        message = TextSendMessage("coba ceritakan jawabanmu jika kamu memilih truth atau peragarakan langsung/videokan jika kamu memilih dare")
+        line_bot_api.reply_message(event.reply_token, message)
+
+    if msg_from_user == 'gabisa':
         image_message = ImageSendMessage(
             original_content_url=gambar,
             preview_image_url='https://i.pinimg.com/564x/40/1e/cf/401ecf89c1d2cbac56d26cc95c3f9fb2.jpg'
         )
         line_bot_api.reply_message(event.reply_token, image_message)
     
-    if msg_from_user == 'selesai':
+    if msg_from_user == 'berhenti':
         sticker_message = StickerSendMessage(
             package_id='11537',
             sticker_id=stiker)
         line_bot_api.reply_message(event.reply_token, sticker_message)
-
 
 import os
 if __name__ == "__main__":
