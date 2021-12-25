@@ -9,13 +9,14 @@ from linebot.exceptions import (
 from linebot.models import (
     MessageEvent, TextMessage, FlexSendMessage, 
     TemplateSendMessage, ConfirmTemplate, PostbackTemplateAction, MessageTemplateAction,
-    ButtonsTemplate, URITemplateAction, TextSendMessage, CarouselTemplate, CarouselColumn, ImageSendMessage, StickerSendMessage
+    ButtonsTemplate, URITemplateAction, TextSendMessage, CarouselTemplate, CarouselColumn, ImageSendMessage, StickerSendMessage,
+    ImageCarouselTemplate, ImageCarouselColumn
 )
 
 app = Flask(__name__)
 
-ACCESS_TOKEN = 'eZPM9Z3fWIW/Olj8KsgFSNQnrsUOeSVL8iamIM1izgmSX+lxiBt9ZwpBMW9z+sAd2k6CEq+rEEUWa2AKdLPLtWNMtbJ+hfsPTMCXrim82lsrwmXJBf6yMGOpP3ytt+g5n22VKMYFhMEEvjKtobdbcwdB04t89/1O/w1cDnyilFU='
-SECRET = 'b779378e986062ccf3c3fef7d8a3f917'
+ACCESS_TOKEN = 'jQGLwPDhSjKEFKelsMA2cnsxd8ZxGq42pcuTXi/sqsgfsRZ7h2pRjJO3792h+wS8xjCsJe5EaXErpibtaeodYEffeBhogIM5vqNyzQX0SKjUNym6MFJ/ps4r7f5hiIPwqtJBvpyOSyjsFUEUBVwZeAdB04t89/1O/w1cDnyilFU='
+SECRET = '8cd59793f3c030c59e6ffe9f53999d62'
 
 line_bot_api = LineBotApi(ACCESS_TOKEN)
 handler = WebhookHandler(SECRET)
@@ -108,42 +109,68 @@ def handle_message(event):
 
     if msg_from_user == 'mulai':
         message = TemplateSendMessage(
-            alt_text='Buttons template',
-            template=ButtonsTemplate(
-                thumbnail_image_url='https://i.pinimg.com/564x/0d/b8/98/0db89880dfa0595585f33ddb50da89f9.jpg',
-                title='Menu',
-                text='Silahkan pilih',
+            alt_text='Confirm template',
+            template=ConfirmTemplate(
+                text='Selamat datang di Line Chatbot games truth or dare',
                 actions=[
-                    URITemplateAction(
-                        label='Video tutorial games',
-                        uri='https://youtu.be/4iP4PEncYDY'
+                    MessageTemplateAction(
+                        label='Aturan cara bermain',
+                        text='aturan'
                     ),
                     MessageTemplateAction(
-                        label='Mulai truth or dare',
+                        label='Mulai gamesnya',
                         text='start'
                     )
                 ]
             )
-        )
+        )   
         line_bot_api.reply_message(event.reply_token, message)
-    
+
+
     if msg_from_user == 'start':
-        message = TextSendMessage( "Kamu Mau pilih truth atau dare?" + 
-        "\nketik 't' untuk memulai games truth" + 
-        "\nketik 'd' untuk memulai games dare")
+        message = TemplateSendMessage(
+            alt_text='Confirm template',
+            template=ConfirmTemplate(
+                text='Mau pilih apa?',
+                actions=[
+                    MessageTemplateAction(
+                        label='Truth',
+                        text='t'
+                    ),
+                    MessageTemplateAction(
+                        label='Dare',
+                        text='d'
+                    )
+                ]
+            )
+        )   
         line_bot_api.reply_message(event.reply_token, message)
 
-    if msg_from_user == 'aturan':
-        message = ImageSendMessage(
-        original_content_url='https://i.pinimg.com/564x/19/e9/c0/19e9c08e84ea5b4b713abc25f846b559.jpg',
-        preview_image_url='https://i.pinimg.com/564x/19/e9/c0/19e9c08e84ea5b4b713abc25f846b559.jpg')
+    if msg_from_user == 'selesai':
+        message = TemplateSendMessage(
+            alt_text='Confirm template',
+            template=ConfirmTemplate(
+                text='Mau lanjut?',
+                actions=[
+                    MessageTemplateAction(
+                        label='berhenti',
+                        text='berhenti'
+                    ),
+                    MessageTemplateAction(
+                        label='lanjut',
+                        text='mulai'
+                    )
+                ]
+            )
+        )   
         line_bot_api.reply_message(event.reply_token, message)
 
-    if msg_from_user == 'truth':
+
+    if msg_from_user == 't':
         message = TextSendMessage(tth + "\n" + "Apakah bisa menjawabnya? Ketik 'bisa' jika memang bisa dan ketik 'gabisa' jika tidak mampu melakukannya")
         line_bot_api.reply_message(event.reply_token, message)
 
-    if msg_from_user == 'dare':
+    if msg_from_user == 'd':
         message = TextSendMessage(dare + "\n" + "Apakah bisa melakukan tantangan ini? Ketik 'bisa' jika memang bisa dan ketik 'gabisa' jika tidak mampu melakukannya")
         line_bot_api.reply_message(event.reply_token, message)
 
@@ -157,6 +184,13 @@ def handle_message(event):
             preview_image_url='https://i.pinimg.com/564x/40/1e/cf/401ecf89c1d2cbac56d26cc95c3f9fb2.jpg'
         )
         line_bot_api.reply_message(event.reply_token, image_message)
+
+    if msg_from_user == 'aturan':
+        image_message = ImageSendMessage(
+            original_content_url='https://i.pinimg.com/564x/a2/cd/eb/a2cdeb2f9f29dd0f2717f0a3d04ddecc.jpg',
+            preview_image_url='https://i.pinimg.com/564x/a2/cd/eb/a2cdeb2f9f29dd0f2717f0a3d04ddecc.jpg'
+        )
+        line_bot_api.reply_message(event.reply_token, image_message)
     
     if msg_from_user == 'berhenti':
         sticker_message = StickerSendMessage(
@@ -164,7 +198,5 @@ def handle_message(event):
             sticker_id=stiker)
         line_bot_api.reply_message(event.reply_token, sticker_message)
 
-import os
 if __name__ == "__main__":
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port)
+    app.run()
